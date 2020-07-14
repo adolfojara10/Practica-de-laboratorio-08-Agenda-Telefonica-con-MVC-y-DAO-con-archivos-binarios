@@ -1,0 +1,179 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ec.ups.edu.controlador;
+
+import ec.ups.edu.dao.TelefonoDAOImpl;
+import ec.ups.edu.dao.UsuarioDAOImpl;
+import ec.ups.edu.idao.ITelefonoDAO;
+import ec.ups.edu.idao.IUsuarioDAO;
+import ec.ups.edu.modelo.Telefono;
+import ec.ups.edu.modelo.Usuario;
+import ec.ups.edu.vista.VentanaInicioSesion;
+import java.util.List;
+import java.util.Map;
+
+/**
+ *
+ * @author Adolfo
+ */
+public class ControladorUsuario {
+
+    private int contadorTelefono;
+
+    //objetos vista
+    private VentanaInicioSesion vista;
+
+    //private VistaTelefono vistaT;
+    //objetos modelo
+    private Usuario usuario;
+    private Telefono telefono;
+    //objetos DAO
+    private IUsuarioDAO usuarioDAO;
+    private ITelefonoDAO telefonoDAO;
+
+    public ControladorUsuario(UsuarioDAOImpl clienteDAO, TelefonoDAOImpl direccionDAO) {
+        //   this.vista = vistaCliente;
+        this.usuarioDAO = clienteDAO;
+
+        // this.vistaT = vistaDireccion;
+        this.telefonoDAO = direccionDAO;
+
+        contadorTelefono = 0;
+
+    }
+
+    public void crearUsuario(String nombre, String apellido, String cedula, String correo,
+            String password) {
+
+        usuario = new Usuario();
+
+        usuario.setCedula(cedula);
+        usuario.setNombre(nombre);
+        usuario.setApellido(apellido);
+        usuario.setCorreo(correo);
+        usuario.setContraseña(password);
+        System.out.println(usuario.toString());
+        usuarioDAO.create(usuario);
+    }
+
+    public Usuario iniciarSesion(String correo, String password) {
+
+        //se obtienen los datos de contraseÃ±a y correo
+        //se envian los datos y se recibe una persona
+        usuario = usuarioDAO.iniciarSesion(correo, password);
+        return usuario;
+    }
+
+    public Usuario devolverUsuario() {
+        return usuario;
+    }
+
+    public void actualizarUsuario(String nombre, String apellido, String cedula, String correo,
+            String password) {
+        usuario.setNombre(nombre);
+        usuario.setApellido(apellido);
+        usuario.setCorreo(correo);
+        usuario.setContraseña(password);
+        usuario.setCedula(cedula);
+
+        usuarioDAO.update(usuario);
+
+    }
+
+    public void imprimirTelefonos() {
+        Map<Integer, Telefono> telefonos;
+        telefonos = telefonoDAO.findAll();
+
+        for (Map.Entry<Integer, Telefono> tele : telefonos.entrySet()) {
+            System.out.println("uuu\n" + tele.toString());
+        }
+    }
+
+    public void imprimirUsuario(Usuario usuario) {
+        System.out.println(usuario);
+    }
+
+    public void imprimirUsuarios() {
+        Map<String, Usuario> usuarios;
+        usuarios = usuarioDAO.findAll();
+
+        /*for (Map.Entry<String, Usuario> usu : usuarios.entrySet()) {
+            System.out.println("uuu\n" + usu.toString());
+        }*/
+    }
+
+    public Usuario buscar(String id) {
+        usuario = usuarioDAO.read(id);
+        if (usuario == null) {
+            return null;
+        } else {
+            return usuario;
+        }
+
+    }
+
+    public void agregarTelefono(String numero, String tipo, String operadora) {
+
+        telefono = new Telefono(0, numero, tipo, operadora);
+        telefono.setUsuario(usuario);
+        telefonoDAO.create(telefono);
+        
+        
+        /*telefonoDAO.create(telefono);
+         usuario.agregarTelefono(telefono);
+        usuarioDAO.update(usuario);
+        System.out.println(usuario.getListaTelefonos());*/
+    }
+
+    public void actualizarTelefono(String numero, String tipo, String operadora, int codigo) {
+
+        telefono = new Telefono(codigo, numero, tipo, operadora);
+        telefonoDAO.update(telefono);
+        //usuario.actualizarTelefono(telefono);
+        usuarioDAO.update(usuario);
+        //System.out.println("\neditar\n" + usuario.getListaTelefonos());
+
+    }
+
+    public String buscarTelefono(int codigo) {
+        telefono = telefonoDAO.read(codigo);
+        if (telefono != null) {
+            //usuario.buscar(telefono);
+            return telefono.toString();
+        } else {
+            return "";
+        }
+
+    }
+
+    public void eliminarTelefono(int codigo) {
+
+        telefono = telefonoDAO.read(codigo);
+        //usuario.eliminarTelefono(telefono);
+        telefonoDAO.delete(telefono);
+
+    }
+
+    public List<Telefono> listarTelefonos() {
+
+        return null;
+    }
+
+    public List<Telefono> listarTelefonosVentana(String id) {
+
+        return null;
+    }
+
+    public Map<Integer, Telefono> listarTodos() {
+        return telefonoDAO.findAll();
+    }
+
+    public int codigoTelefono() {
+        int conta = telefonoDAO.codigoTelefono();
+        return (++conta);
+    }
+
+}
