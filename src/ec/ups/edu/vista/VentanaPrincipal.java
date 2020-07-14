@@ -131,6 +131,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inicio");
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+        setPreferredSize(new java.awt.Dimension(600, 700));
         setSize(new java.awt.Dimension(400, 600));
         getContentPane().add(desktopPane, java.awt.BorderLayout.CENTER);
 

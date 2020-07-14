@@ -81,7 +81,7 @@ public class VentanaGestionTelefonos extends javax.swing.JInternalFrame {
 
         modelo.setRowCount(0);
 
-        for (Telefono telefono : controladorU.listarTelefonos()) {
+       for (Telefono telefono : controladorU.listarTelefonosUsuario()) {
             Object[] rowData = {telefono.getCodigo(), telefono.getNumero(),
                 telefono.getTipo(), telefono.getOperadora()};
             modelo.addRow(rowData);
@@ -323,11 +323,11 @@ public class VentanaGestionTelefonos extends javax.swing.JInternalFrame {
         String numero = txtFormatedNumero.getText();
         String operadora = cbxOperadora.getSelectedItem().toString();
         String tipo = cbxTipo.getSelectedItem().toString();
-
+        int cod = Integer.parseInt(txtCodigo.getText());
         if (numero.isEmpty() || tipo.equals(cbxTipo.getItemAt(0)) || operadora.equals(cbxOperadora.getItemAt(0))) {
             JOptionPane.showMessageDialog(this, "Llene el casillero del número del teléfono");
         } else {
-            controladorU.agregarTelefono(numero, tipo, operadora);
+            controladorU.agregarTelefono(cod,numero, tipo, operadora);
             JOptionPane.showMessageDialog(this, "Teléfono creado con exito");
             llenarTablaTelefonos();
             limpiar();

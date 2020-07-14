@@ -6,6 +6,7 @@
 package ec.ups.edu.idao;
 
 import ec.ups.edu.modelo.Telefono;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -69,7 +70,9 @@ public interface ITelefonoDAO {
      *
      * @return Map
      */
-    public Map<Integer, Telefono> findAll();
+    public List<Telefono> findAll();
+    
+    public List<Telefono> telefonosUsuario(String id);
     
     public int codigoTelefono();
     

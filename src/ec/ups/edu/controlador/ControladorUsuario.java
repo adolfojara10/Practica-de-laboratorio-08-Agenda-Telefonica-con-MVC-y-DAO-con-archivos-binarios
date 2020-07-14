@@ -12,6 +12,7 @@ import ec.ups.edu.idao.IUsuarioDAO;
 import ec.ups.edu.modelo.Telefono;
 import ec.ups.edu.modelo.Usuario;
 import ec.ups.edu.vista.VentanaInicioSesion;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -84,11 +85,11 @@ public class ControladorUsuario {
     }
 
     public void imprimirTelefonos() {
-        Map<Integer, Telefono> telefonos;
+        List<Telefono> telefonos;
         telefonos = telefonoDAO.findAll();
 
-        for (Map.Entry<Integer, Telefono> tele : telefonos.entrySet()) {
-            System.out.println("uuu\n" + tele.toString());
+        for (Telefono tele : telefonos) {
+            System.out.println(tele.toString());
         }
     }
 
@@ -115,13 +116,12 @@ public class ControladorUsuario {
 
     }
 
-    public void agregarTelefono(String numero, String tipo, String operadora) {
+    public void agregarTelefono(int codigo, String numero, String tipo, String operadora) {
 
-        telefono = new Telefono(0, numero, tipo, operadora);
+        telefono = new Telefono(codigo, numero, tipo, operadora);
         telefono.setUsuario(usuario);
         telefonoDAO.create(telefono);
-        
-        
+
         /*telefonoDAO.create(telefono);
          usuario.agregarTelefono(telefono);
         usuarioDAO.update(usuario);
@@ -133,7 +133,7 @@ public class ControladorUsuario {
         telefono = new Telefono(codigo, numero, tipo, operadora);
         telefonoDAO.update(telefono);
         //usuario.actualizarTelefono(telefono);
-        usuarioDAO.update(usuario);
+        //usuarioDAO.update(usuario);
         //System.out.println("\neditar\n" + usuario.getListaTelefonos());
 
     }
@@ -157,9 +157,10 @@ public class ControladorUsuario {
 
     }
 
-    public List<Telefono> listarTelefonos() {
+    public List<Telefono> listarTelefonosUsuario() {
+        String id = usuario.getCedula().trim();
 
-        return null;
+        return telefonoDAO.telefonosUsuario(id);
     }
 
     public List<Telefono> listarTelefonosVentana(String id) {
@@ -167,7 +168,7 @@ public class ControladorUsuario {
         return null;
     }
 
-    public Map<Integer, Telefono> listarTodos() {
+    public List<Telefono> listarTodos() {
         return telefonoDAO.findAll();
     }
 

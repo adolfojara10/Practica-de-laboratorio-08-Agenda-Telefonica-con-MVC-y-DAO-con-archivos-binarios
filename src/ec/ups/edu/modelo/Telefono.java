@@ -62,7 +62,7 @@ public class Telefono {
      * @param codigo
      */
     public void setCodigo(int codigo) {
-        this.codigo = Integer.parseInt(validarEspacios(String.valueOf(codigo), 4));
+        this.codigo = codigo;
     }
 
     /**

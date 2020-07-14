@@ -10,6 +10,7 @@ import ec.ups.edu.modelo.Telefono;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.HashMap;
+import java.util.*;
 import java.util.Map;
 
 /**
@@ -22,17 +23,17 @@ public class TelefonoDAOImpl implements ITelefonoDAO {
      * private int codigo (4 bytes) private String numero; (20 bytes) + 2extras
      * private String tipo; (25 bytes) + 2extras private String operadora; (25
      * bytes) + 2extras private Usuario usuario; (cedula ID) 10 bytes + 2 extras
-     * total === 97 bytes
+     * total === 92 bytes
      */
-    private Map<Integer, Telefono> listaTelefonos;
+    private List<Telefono> listaTelefonos;
     private int codigo;
     private int tamañoRegistro;
     private RandomAccessFile archivo;
-    
+
     public TelefonoDAOImpl() {
-        listaTelefonos = new HashMap<>();
+        listaTelefonos = new ArrayList<>();
         codigo = 0;
-        tamañoRegistro = 97;
+        tamañoRegistro = 92;
         try {
             archivo = new RandomAccessFile("C:\\Users\\Adolfo\\Desktop\\POO\\InterfazGraficaconArchivosBinarios\\datos\\telefono.dat", "rw");
         } catch (IOException ex) {
@@ -46,6 +47,7 @@ public class TelefonoDAOImpl implements ITelefonoDAO {
     public void create(Telefono telefono) {
         telefono.setCodigo(++codigo);
         try {
+            archivo.seek(archivo.length());
             archivo.writeInt(telefono.getCodigo());
             archivo.writeUTF(telefono.getNumero());
             archivo.writeUTF(telefono.getOperadora());
@@ -54,38 +56,79 @@ public class TelefonoDAOImpl implements ITelefonoDAO {
         } catch (IOException ex) {
             System.out.println("Error (create Telefono)");
         }
-        
+
     }
 
     //para devolver un telefono de la base de datos
     @Override
     public Telefono read(int id) {
-        
+
         return null;
     }
 
     //para actualizar un telefono
     @Override
     public void update(Telefono telefono) {
-        
+
     }
 
     //para eliminar un telefono
     @Override
     public void delete(Telefono telefono) {
-        
+
     }
 
     //para devolver un mapa de telefonos
     @Override
-    public Map<Integer, Telefono> findAll() {
+    public List<Telefono> findAll() {
+        try {
+            int salto = 0;
+
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                Telefono tele = new Telefono(archivo.readInt(), archivo.readUTF().trim(), archivo.readUTF().trim(),
+                        archivo.readUTF().trim());
+                listaTelefonos.add(tele);
+                salto += tamañoRegistro;
+            }
+
+        } catch (IOException ex) {
+            System.out.println("error find all telefono");
+        }
         return null;
     }
-    
+
+    @Override
+    public List<Telefono> telefonosUsuario(String id) {
+        List<Telefono> teles = new ArrayList<>();
+
+        try {
+            int salto = 80;
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                String aux = archivo.readUTF().trim();
+                System.out.println(aux);
+                if (aux.equals(id)) {
+                    System.out.println("hola");
+                    archivo.seek(salto - 80);
+                    Telefono tele = new Telefono(archivo.readInt(), archivo.readUTF().trim(),
+                            archivo.readUTF().trim(), archivo.readUTF().trim());
+                    teles.add(tele);
+                }
+                salto+=tamañoRegistro;
+            }
+            return teles;
+        } catch (IOException ex) {
+            System.out.println("Error telefonos usuario");
+        }
+
+        return teles;
+    }
+
     @Override
     public int codigoTelefono() {
         try {
-            if (archivo.length() > tamañoRegistro) {
+            if (archivo.length() >= tamañoRegistro) {
                 archivo.seek(archivo.length() - tamañoRegistro);
                 return archivo.readInt();
             } else {

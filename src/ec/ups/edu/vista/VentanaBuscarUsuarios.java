@@ -281,7 +281,7 @@ public class VentanaBuscarUsuarios extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         limpiar();
 
-        Map<Integer, Telefono> telefonosDao = controladorU.listarTodos();
+       /* Map<Integer, Telefono> telefonosDao = controladorU.listarTodos();
         DefaultTableModel modelo = (DefaultTableModel) tblListar.getModel();
         modelo.setRowCount(0);
 
@@ -291,7 +291,7 @@ public class VentanaBuscarUsuarios extends javax.swing.JInternalFrame {
             Object[] te = {t.getCodigo(), t.getNumero(), t.getTipo(), t.getOperadora()};
             modelo.addRow(te);
         }
-        tblListar.setModel(modelo);
+        tblListar.setModel(modelo);*/
 
     }//GEN-LAST:event_btnListarTodosActionPerformed
 
