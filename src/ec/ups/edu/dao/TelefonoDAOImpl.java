@@ -45,8 +45,10 @@ public class TelefonoDAOImpl implements ITelefonoDAO {
     //mandar un telefono a la base datos
     @Override
     public void create(Telefono telefono) {
-        telefono.setCodigo(++codigo);
+       // telefono.setCodigo(++codigo);
+       
         try {
+            codigo++;
             archivo.seek(archivo.length());
             archivo.writeInt(telefono.getCodigo());
             archivo.writeUTF(telefono.getNumero());
@@ -91,11 +93,11 @@ public class TelefonoDAOImpl implements ITelefonoDAO {
                 listaTelefonos.add(tele);
                 salto += tamañoRegistro;
             }
-
+            return listaTelefonos;
         } catch (IOException ex) {
             System.out.println("error find all telefono");
         }
-        return null;
+        return listaTelefonos;
     }
 
     @Override
@@ -108,7 +110,7 @@ public class TelefonoDAOImpl implements ITelefonoDAO {
                 archivo.seek(salto);
                 String aux = archivo.readUTF().trim();
                 System.out.println(aux);
-                if (aux.equals(id)) {
+                if (aux.equals(id.trim())) {
                     System.out.println("hola");
                     archivo.seek(salto - 80);
                     Telefono tele = new Telefono(archivo.readInt(), archivo.readUTF().trim(),

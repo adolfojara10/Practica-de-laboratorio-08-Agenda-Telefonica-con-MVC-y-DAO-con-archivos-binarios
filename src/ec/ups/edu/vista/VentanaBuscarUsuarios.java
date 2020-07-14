@@ -252,12 +252,13 @@ public class VentanaBuscarUsuarios extends javax.swing.JInternalFrame {
                 txtNombre.setText(u.getNombre());
                 txtApellido.setText(u.getApellido());
                 txtCorreo.setText(u.getCorreo());
-
-                //telefonos = u.getListaTelefonos();
-                if (telefonos.isEmpty()) {
+                
+                List<Telefono> telefonosUsuario = new ArrayList<>();
+                telefonosUsuario = controladorU.listarTelefonosVentana(u.getCedula());
+                if (telefonosUsuario.isEmpty()) {
                     JOptionPane.showMessageDialog(this, "Usted no tiene ningún teléfono creado");
                 } else {
-                    llenarTablaTelefonos(telefonos);
+                    llenarTablaTelefonos(telefonosUsuario);
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Usuario no encontrado. Intentelo otra vez");
@@ -281,13 +282,15 @@ public class VentanaBuscarUsuarios extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         limpiar();
 
-       /* Map<Integer, Telefono> telefonosDao = controladorU.listarTodos();
-        DefaultTableModel modelo = (DefaultTableModel) tblListar.getModel();
+        List<Telefono> telefonosDao = new ArrayList<>();
+        telefonosDao= controladorU.listarTodos();
+       
+        llenarTablaTelefonos(telefonosDao);
+        /* DefaultTableModel modelo = (DefaultTableModel) tblListar.getModel();
         modelo.setRowCount(0);
 
-        for (Map.Entry<Integer, Telefono> tele : telefonosDao.entrySet()) {
+        for (Telefono t: telefonosDao) {
 
-            Telefono t = tele.getValue();
             Object[] te = {t.getCodigo(), t.getNumero(), t.getTipo(), t.getOperadora()};
             modelo.addRow(te);
         }

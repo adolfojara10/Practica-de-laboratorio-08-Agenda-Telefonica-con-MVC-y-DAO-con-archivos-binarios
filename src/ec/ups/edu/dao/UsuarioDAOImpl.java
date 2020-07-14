@@ -70,8 +70,8 @@ public class UsuarioDAOImpl implements IUsuarioDAO {
         try {
             while (salto < archivo.length()) {
                 archivo.seek(salto);
-                String cedulaArchivo = archivo.readUTF();
-                if (cedula.equals(cedulaArchivo)) {
+                String cedulaArchivo = archivo.readUTF().trim();
+                if (cedula.trim().equals(cedulaArchivo)) {
                     Usuario usuario1 = new Usuario(cedula, archivo.readUTF().trim(),
                             archivo.readUTF().trim(), archivo.readUTF().trim(),
                             archivo.readUTF().trim());

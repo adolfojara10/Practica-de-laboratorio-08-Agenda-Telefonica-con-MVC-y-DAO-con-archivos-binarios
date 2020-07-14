@@ -164,8 +164,8 @@ public class ControladorUsuario {
     }
 
     public List<Telefono> listarTelefonosVentana(String id) {
-
-        return null;
+        
+        return telefonoDAO.telefonosUsuario(id);
     }
 
     public List<Telefono> listarTodos() {
