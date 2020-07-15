@@ -207,6 +207,7 @@ public class VentanaGestionUsuario extends javax.swing.JInternalFrame {
                 controladorU.actualizarUsuario(name, apellido, cedula, correo, password);
                 JOptionPane.showMessageDialog(this, "Sus datos han sido actulizados con exito");
                 cargarDatos();
+                dispose();
             }
         }
 
