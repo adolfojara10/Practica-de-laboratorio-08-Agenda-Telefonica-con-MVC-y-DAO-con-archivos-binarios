@@ -40,7 +40,7 @@ public class UsuarioDAOImpl implements IUsuarioDAO {
     public UsuarioDAOImpl() {
         registro = 128;
         try {
-            archivo = new RandomAccessFile("C:\\Users\\Adolfo\\Desktop\\POO\\InterfazGraficaconArchivosBinarios\\datos\\usuario.dat", "rw");
+            archivo = new RandomAccessFile("datos/usuario.dat", "rw");
         } catch (IOException ex) {
             System.out.println("error de escritura y lectura");
             ex.printStackTrace();
@@ -89,6 +89,26 @@ public class UsuarioDAOImpl implements IUsuarioDAO {
     @Override
     public void update(Usuario cliente) {
 
+        int salto = 0;
+        String cedula=cliente.getCedula();
+        try {
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                String cedulaArchivo = archivo.readUTF().trim();
+                if (cedula.trim().equals(cedulaArchivo)) {
+                    //archivo.writeUTF(cliente.getCedula());
+                    archivo.writeUTF(cliente.getNombre());
+                    archivo.writeUTF(cliente.getApellido());
+                    archivo.writeUTF(cliente.getCorreo());
+                    archivo.writeUTF(cliente.getContraseña());
+                    break;
+                }
+                salto += registro;
+            }
+        } catch (IOException ex) {
+            System.out.println("Error de lectura o escritura(upDateUsuario)");
+        }
+        
     }
 
     //para eliminar un usuario

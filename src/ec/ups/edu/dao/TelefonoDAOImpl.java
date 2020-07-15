@@ -35,7 +35,7 @@ public class TelefonoDAOImpl implements ITelefonoDAO {
         codigo = 0;
         tamañoRegistro = 92;
         try {
-            archivo = new RandomAccessFile("C:\\Users\\Adolfo\\Desktop\\POO\\InterfazGraficaconArchivosBinarios\\datos\\telefono.dat", "rw");
+            archivo = new RandomAccessFile("datos/telefono.dat", "rw");
         } catch (IOException ex) {
             System.out.println("error de escritura y lectura(teelfonoDAO)");
             ex.printStackTrace();
@@ -72,6 +72,23 @@ public class TelefonoDAOImpl implements ITelefonoDAO {
     @Override
     public void update(Telefono telefono) {
 
+        int salto = 0;
+        int codigo= telefono.getCodigo();
+        try {
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                int codigoArchivo = archivo.readInt();
+                if (codigo== codigoArchivo ) {
+                    archivo.writeUTF(telefono.getNumero());
+                    archivo.writeUTF(telefono.getOperadora());
+                    archivo.writeUTF(telefono.getTipo());
+                    break;
+                }
+                salto += tamañoRegistro;
+            }
+        } catch (IOException ex) {
+            System.out.println("Error de lectura o escritura(upDate Telefono)");
+        }
     }
 
     //para eliminar un telefono
