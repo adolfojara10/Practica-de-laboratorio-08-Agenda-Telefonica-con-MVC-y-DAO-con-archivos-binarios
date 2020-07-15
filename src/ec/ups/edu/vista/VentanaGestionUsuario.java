@@ -83,6 +83,7 @@ public class VentanaGestionUsuario extends javax.swing.JInternalFrame {
         jLabel5.setText("Cédula");
 
         txtCedula.setEditable(false);
+        txtCedula.setBackground(new java.awt.Color(255, 255, 204));
 
         btnActualizar.setBackground(new java.awt.Color(102, 102, 255));
         btnActualizar.setText("Actualizar datos");

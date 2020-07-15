@@ -53,15 +53,15 @@ public interface ITelefonoDAO {
     public void update(Telefono telefono);
 
     /**
-     * metodo eliminarTelefono.
+     * metodo eliminarTelefono.este metodo recibe al usuario que ha iniciado
+     * sesion, y al codigo del telefono que va a hacer eliminado.
      *
-     * este metodo recibe al usuario que ha iniciado sesion, y al codigo del
-     * telefono que va a hacer eliminado. Borra el telefono y devuelve el nuevo
-     * diccionario del usuario.
+     * Borra el telefono y devuelve el nuevo diccionario del usuario.
      *
-     * @param telefono
+     *
+     * @param id
      */
-    public void delete(Telefono telefono);
+    public void delete(int id);
 
     /**
      * metodo findAll.
@@ -71,9 +71,9 @@ public interface ITelefonoDAO {
      * @return Map
      */
     public List<Telefono> findAll();
-    
+
     public List<Telefono> telefonosUsuario(String id);
-    
+
     public int codigoTelefono();
-    
+
 }

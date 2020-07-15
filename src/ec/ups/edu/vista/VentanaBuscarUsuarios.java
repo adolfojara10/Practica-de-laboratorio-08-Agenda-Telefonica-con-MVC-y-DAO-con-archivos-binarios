@@ -303,7 +303,7 @@ public class VentanaBuscarUsuarios extends javax.swing.JInternalFrame {
         modelo.setRowCount(0);
         for (Telefono telefono : teles) {
             Object[] tele = {telefono.getCodigo(), telefono.getNumero(),
-                telefono.getTipo(), telefono.getOperadora()};
+                telefono.getOperadora(), telefono.getTipo()};
             modelo.addRow(tele);
         }
         tblListar.setModel(modelo);

@@ -151,9 +151,9 @@ public class ControladorUsuario {
 
     public void eliminarTelefono(int codigo) {
 
-        telefono = telefonoDAO.read(codigo);
+        //telefono = telefonoDAO.read(codigo);
         //usuario.eliminarTelefono(telefono);
-        telefonoDAO.delete(telefono);
+        telefonoDAO.delete(codigo);
 
     }
 

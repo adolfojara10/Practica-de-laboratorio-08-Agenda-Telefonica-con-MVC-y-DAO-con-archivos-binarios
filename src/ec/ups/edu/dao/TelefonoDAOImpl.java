@@ -46,8 +46,8 @@ public class TelefonoDAOImpl implements ITelefonoDAO {
     //mandar un telefono a la base datos
     @Override
     public void create(Telefono telefono) {
-       // telefono.setCodigo(++codigo);
-       
+        // telefono.setCodigo(++codigo);
+
         try {
             codigo++;
             archivo.seek(archivo.length());
@@ -74,12 +74,12 @@ public class TelefonoDAOImpl implements ITelefonoDAO {
     public void update(Telefono telefono) {
 
         int salto = 0;
-        int codigo= telefono.getCodigo();
+        int codigo = telefono.getCodigo();
         try {
             while (salto < archivo.length()) {
                 archivo.seek(salto);
                 int codigoArchivo = archivo.readInt();
-                if (codigo== codigoArchivo ) {
+                if (codigo == codigoArchivo) {
                     archivo.writeUTF(telefono.getNumero());
                     archivo.writeUTF(telefono.getOperadora());
                     archivo.writeUTF(telefono.getTipo());
@@ -94,8 +94,34 @@ public class TelefonoDAOImpl implements ITelefonoDAO {
 
     //para eliminar un telefono
     @Override
-    public void delete(Telefono telefono) {
+    public void delete(int id) {
 
+        int salto = 0;
+
+        try {
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                int codigoArchivo = archivo.readInt();
+                if (id == codigoArchivo) {
+                    archivo.seek(salto);
+                    archivo.writeInt(0);
+                    archivo.writeUTF(llenarEspacios(20));
+                    archivo.writeUTF(llenarEspacios(25));
+                    archivo.writeUTF(llenarEspacios(25));
+                    archivo.writeUTF(llenarEspacios(10));
+                    break;
+                }
+                salto += tamañoRegistro;
+            }
+        } catch (IOException ex) {
+            System.out.println("Error de lectura o escritura(upDate Telefono)");
+        }
+
+    }
+
+    public String llenarEspacios(int espacios) {
+        String formato = "";
+        return String.format("%-" + espacios + "s", formato);
     }
 
     //para devolver un mapa de telefonos
@@ -106,9 +132,14 @@ public class TelefonoDAOImpl implements ITelefonoDAO {
 
             while (salto < archivo.length()) {
                 archivo.seek(salto);
-                Telefono tele = new Telefono(archivo.readInt(), archivo.readUTF().trim(), archivo.readUTF().trim(),
-                        archivo.readUTF().trim());
-                listaTelefonos.add(tele);
+
+                int valor = archivo.readInt();
+                if (valor > 0) {
+                    Telefono tele = new Telefono(valor, archivo.readUTF().trim(),
+                            archivo.readUTF().trim(), archivo.readUTF().trim());
+                    listaTelefonos.add(tele);
+                }
+
                 salto += tamañoRegistro;
             }
             return listaTelefonos;
@@ -129,13 +160,18 @@ public class TelefonoDAOImpl implements ITelefonoDAO {
                 String aux = archivo.readUTF().trim();
                 System.out.println(aux);
                 if (aux.equals(id.trim())) {
-                    System.out.println("hola");
+                    //System.out.println("hola");
+
                     archivo.seek(salto - 80);
-                    Telefono tele = new Telefono(archivo.readInt(), archivo.readUTF().trim(),
-                            archivo.readUTF().trim(), archivo.readUTF().trim());
-                    teles.add(tele);
+                    int valor = archivo.readInt();
+                    if (valor > 0) {
+                        Telefono tele = new Telefono(valor, archivo.readUTF().trim(),
+                                archivo.readUTF().trim(), archivo.readUTF().trim());
+                        teles.add(tele);
+                    }
+
                 }
-                salto+=tamañoRegistro;
+                salto += tamañoRegistro;
             }
             return teles;
         } catch (IOException ex) {
@@ -147,16 +183,33 @@ public class TelefonoDAOImpl implements ITelefonoDAO {
 
     @Override
     public int codigoTelefono() {
+
         try {
-            if (archivo.length() >= tamañoRegistro) {
-                archivo.seek(archivo.length() - tamañoRegistro);
-                return archivo.readInt();
+            if (archivo.length()>0) {
+                //archivo.seek(archivo.length() - tamañoRegistro);
+                int aux=(int)(archivo.length()/tamañoRegistro);
+                
+                /*if(archivo.readInt()==0)
+                {
+                    archivo.seek(archivo.length()-(tamañoRegistro*2));
+                    System.out.println(archivo.readInt()+"\n1");
+                    return archivo.readInt();
+                    
+                }else{
+                    System.out.println(archivo.readInt()+"\n2");
+                    return archivo.readInt();
+                }*/
+                System.out.println(aux);
+                return aux;
+
             } else {
-                return codigo;
+                //System.out.println(archivo.readInt() + "\n3");
+                return 0;
             }
         } catch (IOException ex) {
             System.out.println("Error codigo(codigoTelefono)");
         }
-        return (codigo);
+        //System.out.println(archivo.readInt()+"\n4");
+        return codigo;
     }
 }
