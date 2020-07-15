@@ -75,5 +75,7 @@ public interface ITelefonoDAO {
     public List<Telefono> telefonosUsuario(String id);
 
     public int codigoTelefono();
+    
+    public String llenarEspacios(int espacios);
 
 }

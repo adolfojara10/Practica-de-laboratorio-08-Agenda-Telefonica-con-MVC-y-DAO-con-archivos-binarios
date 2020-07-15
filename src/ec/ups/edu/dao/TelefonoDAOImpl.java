@@ -25,18 +25,16 @@ public class TelefonoDAOImpl implements ITelefonoDAO {
      * bytes) + 2extras private Usuario usuario; (cedula ID) 10 bytes + 2 extras
      * total === 92 bytes
      */
-    private List<Telefono> listaTelefonos;
     private int codigo;
     private int tamañoRegistro;
     private RandomAccessFile archivo;
 
     public TelefonoDAOImpl() {
-        listaTelefonos = new ArrayList<>();
         codigo = 0;
         tamañoRegistro = 92;
         try {
-            //archivo = new RandomAccessFile("C:\\Users\\Adolfo\\Desktop\\POO\\InterfazGraficaconArchivosBinarios\\datos\\telefono.dat", "rw");
-            archivo = new RandomAccessFile("datos/telefono.dat", "rw");
+            archivo = new RandomAccessFile("C:\\Users\\Adolfo\\Desktop\\POO\\InterfazGraficaconArchivosBinarios\\datos\\telefono.dat", "rw");
+            //archivo = new RandomAccessFile("datos/telefono.dat", "rw");
         } catch (IOException ex) {
             System.out.println("error de escritura y lectura(teelfonoDAO)");
             ex.printStackTrace();
@@ -119,6 +117,7 @@ public class TelefonoDAOImpl implements ITelefonoDAO {
 
     }
 
+    @Override
     public String llenarEspacios(int espacios) {
         String formato = "";
         return String.format("%-" + espacios + "s", formato);
@@ -127,6 +126,7 @@ public class TelefonoDAOImpl implements ITelefonoDAO {
     //para devolver un mapa de telefonos
     @Override
     public List<Telefono> findAll() {
+        List<Telefono> listaTelefonos = new ArrayList<>();
         try {
             int salto = 0;
 
@@ -185,10 +185,10 @@ public class TelefonoDAOImpl implements ITelefonoDAO {
     public int codigoTelefono() {
 
         try {
-            if (archivo.length()>0) {
+            if (archivo.length() > 0) {
                 //archivo.seek(archivo.length() - tamañoRegistro);
-                int aux=(int)(archivo.length()/tamañoRegistro);
-                
+                int aux = (int) (archivo.length() / tamañoRegistro);
+
                 /*if(archivo.readInt()==0)
                 {
                     archivo.seek(archivo.length()-(tamañoRegistro*2));

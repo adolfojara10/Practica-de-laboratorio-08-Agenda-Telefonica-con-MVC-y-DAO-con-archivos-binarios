@@ -146,6 +146,7 @@ public class VentanaInicioSesion extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 
         this.setVisible(false);
+        limpiar();
 
     }//GEN-LAST:event_btnAtrasActionPerformed
 

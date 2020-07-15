@@ -409,6 +409,7 @@ public class VentanaGestionTelefonos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         limpiar();
         botonesInicio();
+        //para deseleccionar la tabla
         tblTelefonos.clearSelection();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
