@@ -183,10 +183,10 @@ public class VentanaGestionUsuario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         Usuario u = controladorU.devolverUsuario();
 
-        txtNombre.setText(u.getNombre());
-        txtApellido.setText(u.getApellido());
-        txtCorreo.setText(u.getCorreo());
-        txtPassword.setText(u.getContraseña());
+        txtNombre.setText(u.getNombre().trim());
+        txtApellido.setText(u.getApellido().trim());
+        txtCorreo.setText(u.getCorreo().trim());
+        txtPassword.setText(u.getContraseña().trim());
         txtCedula.setText(u.getCedula());
 
     }//GEN-LAST:event_formInternalFrameActivated
