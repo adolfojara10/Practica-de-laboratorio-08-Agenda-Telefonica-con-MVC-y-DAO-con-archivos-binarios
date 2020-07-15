@@ -44,8 +44,8 @@ public class VentanaGestionTelefonos extends javax.swing.JInternalFrame {
         btnEliminar.setEnabled(false);
 
     }
-    
-    public void botonesEditar(){
+
+    public void botonesEditar() {
         btnAgregar.setEnabled(false);
         btnCancelar.setEnabled(true);
         btnEditar.setEnabled(true);
@@ -81,9 +81,9 @@ public class VentanaGestionTelefonos extends javax.swing.JInternalFrame {
 
         modelo.setRowCount(0);
 
-       for (Telefono telefono : controladorU.listarTelefonosUsuario()) {
-            Object[] rowData = {telefono.getCodigo(), telefono.getNumero(),
-                telefono.getTipo(), telefono.getOperadora()};
+        for (Telefono telefono : controladorU.listarTelefonosUsuario()) {
+            Object[] rowData = {telefono.getCodigo(), telefono.getNumero().trim(),
+                telefono.getOperadora().trim(), telefono.getTipo().trim()};
             modelo.addRow(rowData);
         }
         tblTelefonos.setModel(modelo);
@@ -327,7 +327,7 @@ public class VentanaGestionTelefonos extends javax.swing.JInternalFrame {
         if (numero.isEmpty() || tipo.equals(cbxTipo.getItemAt(0)) || operadora.equals(cbxOperadora.getItemAt(0))) {
             JOptionPane.showMessageDialog(this, "Llene el casillero del número del teléfono");
         } else {
-            controladorU.agregarTelefono(cod,numero, tipo, operadora);
+            controladorU.agregarTelefono(cod, numero, tipo, operadora);
             JOptionPane.showMessageDialog(this, "Teléfono creado con exito");
             llenarTablaTelefonos();
             limpiar();
@@ -379,7 +379,7 @@ public class VentanaGestionTelefonos extends javax.swing.JInternalFrame {
         txtFormatedNumero.setValue(num);
         cbxTipo.setSelectedItem(tipo);
         cbxOperadora.setSelectedItem(opera);
-        
+
         botonesEditar();
 
     }//GEN-LAST:event_tblTelefonosMouseClicked
@@ -402,18 +402,20 @@ public class VentanaGestionTelefonos extends javax.swing.JInternalFrame {
             limpiar();
 
         }
+
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         limpiar();
         botonesInicio();
+        tblTelefonos.clearSelection();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
         int eliminar = JOptionPane.showConfirmDialog(this, "¿Seguro quieres eliminar este teléfono?");
-        if(eliminar == JOptionPane.YES_OPTION){
+        if (eliminar == JOptionPane.YES_OPTION) {
             int cod = Integer.parseInt(txtCodigo.getText());
             controladorU.eliminarTelefono(cod);
             JOptionPane.showMessageDialog(this, "Telefono eliminado con exito");
@@ -430,6 +432,7 @@ public class VentanaGestionTelefonos extends javax.swing.JInternalFrame {
         cbxOperadora.setSelectedIndex(0);
         cbxTipo.setSelectedIndex(0);
         cargarCodigo();
+        tblTelefonos.clearSelection();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

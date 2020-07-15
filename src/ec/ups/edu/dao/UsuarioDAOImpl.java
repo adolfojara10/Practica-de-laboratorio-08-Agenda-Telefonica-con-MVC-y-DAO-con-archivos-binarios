@@ -40,7 +40,7 @@ public class UsuarioDAOImpl implements IUsuarioDAO {
     public UsuarioDAOImpl() {
         registro = 128;
         try {
-            archivo = new RandomAccessFile("datos/usuario.dat", "rw");
+            archivo = new RandomAccessFile("C:\\Users\\Adolfo\\Desktop\\POO\\InterfazGraficaconArchivosBinarios\\datos\\usuario.dat", "rw");
         } catch (IOException ex) {
             System.out.println("error de escritura y lectura");
             ex.printStackTrace();

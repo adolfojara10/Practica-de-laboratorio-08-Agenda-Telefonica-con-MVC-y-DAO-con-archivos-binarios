@@ -35,7 +35,7 @@ public class TelefonoDAOImpl implements ITelefonoDAO {
         codigo = 0;
         tamañoRegistro = 92;
         try {
-            archivo = new RandomAccessFile("datos/telefono.dat", "rw");
+            archivo = new RandomAccessFile("C:\\Users\\Adolfo\\Desktop\\POO\\InterfazGraficaconArchivosBinarios\\datos\\telefono.dat", "rw");
         } catch (IOException ex) {
             System.out.println("error de escritura y lectura(teelfonoDAO)");
             ex.printStackTrace();
