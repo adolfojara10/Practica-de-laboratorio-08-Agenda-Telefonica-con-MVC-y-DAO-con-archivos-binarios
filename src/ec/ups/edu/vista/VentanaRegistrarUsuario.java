@@ -205,6 +205,10 @@ public class VentanaRegistrarUsuario extends javax.swing.JInternalFrame {
                 || password.isEmpty()) {
             JOptionPane.showMessageDialog(this, "¡Llene todos los campos solicitados!");
 
+        } else if (cedula.length() > 10) {
+            JOptionPane.showMessageDialog(this, "Cédula incorrecta! Mayor a 10 caracteres");
+        } else if (password.length() > 8) {
+            JOptionPane.showMessageDialog(this, "Contraseña incorrecta! No puede contener más de 8 caracteres");
         } else {
             controladorU.crearUsuario(nombre, apellido, cedula, correo, password);
             JOptionPane.showMessageDialog(this, "Usuario creado con exito");

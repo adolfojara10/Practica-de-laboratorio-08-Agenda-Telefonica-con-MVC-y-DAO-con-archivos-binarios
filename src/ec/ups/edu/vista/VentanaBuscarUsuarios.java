@@ -56,6 +56,8 @@ public class VentanaBuscarUsuarios extends javax.swing.JInternalFrame {
         txtCorreo = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JButton();
         btnListarTodos = new javax.swing.JButton();
+        cbxOpcion = new javax.swing.JComboBox<>();
+        txtOpcion = new javax.swing.JTextField();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
@@ -92,7 +94,7 @@ public class VentanaBuscarUsuarios extends javax.swing.JInternalFrame {
             tblListar.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        jLabel1.setText("Ingresar su cédula");
+        jLabel1.setText("Cédula");
 
         btnAtras.setBackground(new java.awt.Color(255, 0, 0));
         btnAtras.setText("Atrás");
@@ -109,6 +111,9 @@ public class VentanaBuscarUsuarios extends javax.swing.JInternalFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
+
+        txtListar.setEditable(false);
+        txtListar.setBackground(new java.awt.Color(255, 255, 153));
 
         jLabel2.setText("Nombre");
 
@@ -141,14 +146,19 @@ public class VentanaBuscarUsuarios extends javax.swing.JInternalFrame {
             }
         });
 
+        cbxOpcion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cédula", "Correo" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(cbxOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel4)
@@ -170,16 +180,21 @@ public class VentanaBuscarUsuarios extends javax.swing.JInternalFrame {
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
                                         .addComponent(txtApellido)
-                                        .addComponent(txtNombre)))
+                                        .addComponent(txtNombre))
+                                    .addComponent(txtOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(49, 49, 49))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addContainerGap(28, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbxOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtListar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -189,13 +204,13 @@ public class VentanaBuscarUsuarios extends javax.swing.JInternalFrame {
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAtras)
                     .addComponent(btnBuscar)
@@ -211,18 +226,18 @@ public class VentanaBuscarUsuarios extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                .addContainerGap())
         );
 
         pack();
@@ -236,32 +251,56 @@ public class VentanaBuscarUsuarios extends javax.swing.JInternalFrame {
         DefaultTableModel modelo = (DefaultTableModel) tblListar.getModel();
         modelo.setRowCount(0);
         tblListar.setModel(modelo);
-        
+
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
 
-        String id = (String) txtListar.getText();
+        String id = (String) txtOpcion.getText();
 
         if (id == null) {
             JOptionPane.showMessageDialog(this, "Llene el campo requerido para listar sus teléfonos");
         } else {
-            Usuario u = controladorU.buscar(id);
-            if (u != null) {
-                txtNombre.setText(u.getNombre());
-                txtApellido.setText(u.getApellido());
-                txtCorreo.setText(u.getCorreo().trim());
-                
-                List<Telefono> telefonosUsuario = new ArrayList<>();
-                telefonosUsuario = controladorU.listarTelefonosVentana(u.getCedula());
-                if (telefonosUsuario.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "Usted no tiene ningún teléfono creado");
+            String opcion = cbxOpcion.getSelectedItem().toString();
+            if (opcion.equals("Cédula")) {
+
+                Usuario u = controladorU.buscar(id);
+                if (u != null) {
+                    txtListar.setText(u.getCedula());
+                    txtNombre.setText(u.getNombre());
+                    txtApellido.setText(u.getApellido());
+                    txtCorreo.setText(u.getCorreo().trim());
+
+                    List<Telefono> telefonosUsuario = new ArrayList<>();
+                    telefonosUsuario = controladorU.listarTelefonosVentana(u.getCedula());
+                    if (telefonosUsuario.isEmpty()) {
+                        JOptionPane.showMessageDialog(this, "Usted no tiene ningún teléfono creado");
+                    } else {
+                        llenarTablaTelefonos(telefonosUsuario);
+                    }
                 } else {
-                    llenarTablaTelefonos(telefonosUsuario);
+                    JOptionPane.showMessageDialog(this, "Usuario no encontrado. Intentelo otra vez");
                 }
+
             } else {
-                JOptionPane.showMessageDialog(this, "Usuario no encontrado. Intentelo otra vez");
+                Usuario u = controladorU.buscarCorreo(id);
+                if (u != null) {
+                    txtListar.setText(u.getCedula());
+                    txtNombre.setText(u.getNombre());
+                    txtApellido.setText(u.getApellido());
+                    txtCorreo.setText(u.getCorreo().trim());
+
+                    List<Telefono> telefonosUsuario = new ArrayList<>();
+                    telefonosUsuario = controladorU.listarTelefonosVentana(u.getCedula());
+                    if (telefonosUsuario.isEmpty()) {
+                        JOptionPane.showMessageDialog(this, "Usted no tiene ningún teléfono creado");
+                    } else {
+                        llenarTablaTelefonos(telefonosUsuario);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Usuario no encontrado. Intentelo otra vez");
+                }
             }
 
         }
@@ -283,8 +322,8 @@ public class VentanaBuscarUsuarios extends javax.swing.JInternalFrame {
         limpiar();
 
         List<Telefono> telefonosDao = new ArrayList<>();
-        telefonosDao= controladorU.listarTodos();
-       
+        telefonosDao = controladorU.listarTodos();
+
         llenarTablaTelefonos(telefonosDao);
         /* DefaultTableModel modelo = (DefaultTableModel) tblListar.getModel();
         modelo.setRowCount(0);
@@ -314,6 +353,7 @@ public class VentanaBuscarUsuarios extends javax.swing.JInternalFrame {
         txtNombre.setText("");
         txtApellido.setText("");
         txtCorreo.setText("");
+        txtOpcion.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -321,6 +361,7 @@ public class VentanaBuscarUsuarios extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnListarTodos;
+    private javax.swing.JComboBox<String> cbxOpcion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -332,5 +373,6 @@ public class VentanaBuscarUsuarios extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtListar;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtOpcion;
     // End of variables declaration//GEN-END:variables
 }

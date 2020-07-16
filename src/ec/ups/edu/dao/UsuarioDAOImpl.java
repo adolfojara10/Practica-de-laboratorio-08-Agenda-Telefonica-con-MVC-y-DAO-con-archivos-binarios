@@ -86,12 +86,42 @@ public class UsuarioDAOImpl implements IUsuarioDAO {
         return null;
     }
 
-    //para actualizar un usuario ya creado
+    @Override
+    public Usuario readCorreo(String correo) {
+        int salto = 66;
+        try {
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+
+                String correoArchivo = archivo.readUTF();
+                String contraseñaArchivo = archivo.readUTF();
+
+                System.out.println(correoArchivo);
+                System.out.println(contraseñaArchivo);
+
+                System.out.println(correo);
+
+                if (correo.equals(correoArchivo.trim())) {
+
+                    archivo.seek(salto - 66);
+                    usuario = new Usuario(archivo.readUTF().trim(), archivo.readUTF().trim(),
+                            archivo.readUTF().trim(), correoArchivo, contraseñaArchivo);
+                    return usuario;
+                }
+                salto += registro;
+            }
+        } catch (IOException ex) {
+            System.out.println("Error read Correo");
+        }
+        return null;
+    }
+
+//para actualizar un usuario ya creado
     @Override
     public void update(Usuario cliente) {
 
         int salto = 0;
-        String cedula=cliente.getCedula();
+        String cedula = cliente.getCedula();
         try {
             while (salto < archivo.length()) {
                 archivo.seek(salto);
@@ -109,13 +139,37 @@ public class UsuarioDAOImpl implements IUsuarioDAO {
         } catch (IOException ex) {
             System.out.println("Error de lectura o escritura(upDateUsuario)");
         }
-        
+
     }
 
     //para eliminar un usuario
     @Override
     public void delete(Usuario cliente) {
+        try {
+            String cedula = cliente.getCedula();
+            int salto = 0;
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                String cedulaArchivo = archivo.readUTF();
+                if (cedula.trim().equals(cedulaArchivo.trim())) {
+                    archivo.writeUTF(llenarEspacios(10));
+                    archivo.writeUTF(llenarEspacios(25));
+                    archivo.writeUTF(llenarEspacios(25));
+                    archivo.writeUTF(llenarEspacios(50));
+                    archivo.writeUTF(llenarEspacios(8));
+                    break;
+                }
+                salto += registro;
+            }
 
+        } catch (IOException ex) {
+            System.out.println("Error delete usuario");
+        }
+    }
+
+    public String llenarEspacios(int espacios) {
+        String aux = "";
+        return String.format("%-" + espacios + "s", aux);
     }
 
     //para iniciar sesion en la cuenta del usuario

@@ -116,6 +116,16 @@ public class ControladorUsuario {
 
     }
 
+    public Usuario buscarCorreo(String correo) {
+        usuario = usuarioDAO.readCorreo(correo);
+        if (usuario == null) {
+            return null;
+        } else {
+            return usuario;
+        }
+
+    }
+
     public void agregarTelefono(int codigo, String numero, String tipo, String operadora) {
 
         telefono = new Telefono(codigo, numero, tipo, operadora);
@@ -164,7 +174,7 @@ public class ControladorUsuario {
     }
 
     public List<Telefono> listarTelefonosVentana(String id) {
-        
+
         return telefonoDAO.telefonosUsuario(id);
     }
 

@@ -34,6 +34,8 @@ public interface IUsuarioDAO {
      * @return Usuario
      */
     public Usuario read(String cedula);
+    
+    public Usuario readCorreo(String correo);
 
     /**
      * metodo update.
@@ -77,4 +79,6 @@ public interface IUsuarioDAO {
      * @return Map<String, Usuario>
      */
     public Map<String, Usuario> findAll();
+    
+    public String llenarEspacios(int espacios);
 }

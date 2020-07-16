@@ -63,7 +63,23 @@ public class TelefonoDAOImpl implements ITelefonoDAO {
     //para devolver un telefono de la base de datos
     @Override
     public Telefono read(int id) {
+        try {
+            int salto = 0;
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                int codigoArchivo = archivo.readInt();
+                if (id == codigoArchivo) {
+                    Telefono tele = new Telefono(codigoArchivo, archivo.readUTF(), archivo.readUTF(),
+                            archivo.readUTF());
+                    return tele;
 
+                }
+                salto += tamañoRegistro;
+            }
+
+        } catch (IOException ex) {
+            System.out.println("Error read telefono");
+        }
         return null;
     }
 
