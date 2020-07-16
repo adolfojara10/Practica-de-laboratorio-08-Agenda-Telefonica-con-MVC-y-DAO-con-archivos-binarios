@@ -72,7 +72,6 @@ public class TelefonoDAOImpl implements ITelefonoDAO {
                     Telefono tele = new Telefono(codigoArchivo, archivo.readUTF(), archivo.readUTF(),
                             archivo.readUTF());
                     return tele;
-
                 }
                 salto += tamañoRegistro;
             }

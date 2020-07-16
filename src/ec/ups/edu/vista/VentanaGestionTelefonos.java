@@ -399,6 +399,10 @@ public class VentanaGestionTelefonos extends javax.swing.JInternalFrame {
             controladorU.actualizarTelefono(numero, tipo, operadora, cod);
             JOptionPane.showMessageDialog(this, "Teléfono actualizado con exito");
             llenarTablaTelefonos();
+            btnAgregar.setEnabled(true);
+            btnCancelar.setEnabled(false);
+            btnEditar.setEnabled(false);
+            btnEliminar.setEnabled(false);
             limpiar();
 
         }
