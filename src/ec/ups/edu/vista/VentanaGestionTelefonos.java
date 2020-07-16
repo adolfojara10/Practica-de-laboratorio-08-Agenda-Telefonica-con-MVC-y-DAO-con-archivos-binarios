@@ -166,7 +166,7 @@ public class VentanaGestionTelefonos extends javax.swing.JInternalFrame {
             }
         });
 
-        cbxOperadora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cbxOperadora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---Seleccione una opcion---" }));
 
         btnEditar.setBackground(new java.awt.Color(153, 153, 255));
         btnEditar.setText("Editar");
@@ -315,6 +315,7 @@ public class VentanaGestionTelefonos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         cargarCodigo();
         llenarTablaTelefonos();
+        limpiar();
 
     }//GEN-LAST:event_formInternalFrameActivated
 
