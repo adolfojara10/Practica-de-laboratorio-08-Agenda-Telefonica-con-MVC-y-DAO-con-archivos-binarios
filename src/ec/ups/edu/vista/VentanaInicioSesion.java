@@ -70,6 +70,23 @@ public class VentanaInicioSesion extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("Iniciar Sesión");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         correo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         correo.setText("Correo electrónico");
@@ -173,6 +190,10 @@ public class VentanaInicioSesion extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_btnInciarSesionActionPerformed
+
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        limpiar();
+    }//GEN-LAST:event_formInternalFrameActivated
     
     public void activarMenus() {
         ventanaPrincipal.getCerrarSesionMenuItem().setVisible(true);

@@ -58,6 +58,23 @@ public class VentanaRegistrarUsuario extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("Registrar Usuario");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         titulo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         titulo.setText("Registrar Usuario");
@@ -218,6 +235,10 @@ public class VentanaRegistrarUsuario extends javax.swing.JInternalFrame {
 
         controladorU.imprimirUsuarios();
     }//GEN-LAST:event_btnCrearUsuarioActionPerformed
+
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        limpiar();
+    }//GEN-LAST:event_formInternalFrameActivated
 
     public void limpiar() {
         txtApellido.setText("");

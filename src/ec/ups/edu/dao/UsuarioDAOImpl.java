@@ -179,8 +179,8 @@ public class UsuarioDAOImpl implements IUsuarioDAO {
         try {
             int salto = 66;
 
-            byte[] correoArreglo = new byte[50];
-            byte[] contraseñaArreglo = new byte[8];
+            //byte[] correoArreglo = new byte[50];
+            //byte[] contraseñaArreglo = new byte[8];
             /* FileReader aux = new FileReader("C:\\Users\\Adolfo\\Desktop\\POO\\InterfazGraficaconArchivosBinarios\\datos\\usuario.dat");
             BufferedReader archivoLectura = new BufferedReader(aux);      */
 

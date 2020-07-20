@@ -25,7 +25,7 @@ public class ControladorUsuario {
     private int contadorTelefono;
 
     //objetos vista
-    private VentanaInicioSesion vista;
+    //private VentanaInicioSesion vista;
 
     //private VistaTelefono vistaT;
     //objetos modelo
